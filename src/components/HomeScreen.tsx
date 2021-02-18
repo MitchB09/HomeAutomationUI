@@ -1,50 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import styles from "./HomeScreen.module.css";
+import StatusButton from "./StatusButton";
+import SimpleButton from "./SimpleButton";
 
 export default function HomeList(props: any) {
-  const [pcStatus, setPCStatus] = useState<boolean>(false);
-
-  useEffect(() => {
-    checkBootPCStatus()
-    return function cleanup() {
-			//Specify how to clean up after this effect:
-    }
-  });
-  // Make a request for a user with a given ID
-  const checkBootPCStatus = () => {
-    axios
-      .get("/bootpc")
-      .then(function (response) {
-        setPCStatus(true);
-      })
-      .catch(function (error) {
-        // trigger polling/show error
-        console.log(error);
-      })
-  };
-
-  const bootPC = () => {
-    console.log("Called bootpc");
-    axios
-      .post("/bootpc")
-      .then(function (response) {
-        // handle success
-        console.log(response);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  };
-
   return (
     <>
       <Grid
@@ -57,26 +19,51 @@ export default function HomeList(props: any) {
       >
         <Grid item>
           <div className={styles.buttonContainer}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={styles.button}
-              onClick={bootPC}
-              disabled={!pcStatus}
-            >
-              Turn on PC
-            </Button>
+            <StatusButton
+              label="Turn on PC"
+              statusUrl="/bootpc"
+              executeUrl="/bootpc"
+            />
           </div>
         </Grid>
         <Grid item>
           <div className={styles.buttonContainer}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={styles.button}
-            >
-              Turn on printer
-            </Button>
+            <SimpleButton
+              label="Turn on printer"
+              onClick={() => {
+                alert("vroom vroom");
+              }}
+            />
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={styles.buttonContainer}>
+            <SimpleButton
+              label="Open OctoPi"
+              onClick={() => {
+                window.open("http://192.168.2.17/");
+              }}
+            />
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={styles.buttonContainer}>
+            <SimpleButton
+              label="Simple Lists"
+              onClick={() => {
+                window.open("https://simplelists.bilensky.ca/");
+              }}
+            />
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={styles.buttonContainer}>
+            <SimpleButton
+              label="Resume Site"
+              onClick={() => {
+                window.open("https://mitch.bilensky.ca/");
+              }}
+            />
           </div>
         </Grid>
       </Grid>
