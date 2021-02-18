@@ -1,14 +1,14 @@
 .App {
-	text-align: center;
-	display: flex;
+  text-align: center;
+  display: flex;
   flex-flow: column;
   height: 100%;
 }
 
 .App-header {
-	background-color: #282c34;
-	flex: 0 1 auto;
-	height: 10vmin;
+  background-color: #282c34;
+  flex: 0 1 auto;
+  height: 10vmin;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -16,12 +16,21 @@
 }
 
 .App-content {
-	flex: 1 1 auto;
+  flex: 1 1 auto;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 8px;
+}
+
+.title {
+  text-align: left;
+  padding-bottom: 8px;
 }
 
 .App-footer {
-	flex: 0 1 40px;
-	background-color: #282c34;
+  flex: 0 1 40px;
+  background-color: #282c34;
 }
 
 .App-link {
