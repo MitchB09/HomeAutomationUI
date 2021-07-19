@@ -1,58 +1,44 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import PropTypes from "prop-types";
 import SimpleButton from "./SimpleButton";
+import api from "../api";
 
-export default function StatusButton(props: any) {
-  const { label, statusUrl, executeUrl } = props;
-  const [status, setStatus] = useState<boolean>(true);
+type StatusButtonProps = {
+  label: string;
+  statusUrl: string;
+  executeUrl: string;
+};
+
+const StatusButton = ({ label, statusUrl, executeUrl }: StatusButtonProps) => {
+  const [status, setStatus] = useState<boolean>(false);
 
   useEffect(() => {
-    checkStatus();
-    return function cleanup() {
-      //Specify how to clean up after this effect:
-    };
-  });
-  // Make a request for a user with a given ID
-  const checkStatus = () => {
-    axios
-      .get("/" + statusUrl)
+    api
+      .get(statusUrl)
       .then(() => {
         setStatus(true);
       })
-      .catch(function (error) {
-        // trigger polling/show error
+      .catch((error) => {
         console.log(error);
       });
-  };
+  }, [statusUrl]);
 
   const execute = () => {
-    axios
-      .post("/" + executeUrl)
-      .then(function (response) {
+    api
+      .post(executeUrl)
+      .then((response) => {
         // handle success
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         // handle error
         console.log(error);
       })
-      .then(function () {
+      .then(() => {
         // always executed
       });
   };
 
-  return (
-    <SimpleButton
-			label={label}
-			onClick={execute}
-			disabled={!status}
-    />
-  );
-}
-
-StatusButton.propTypes = {
-  label: PropTypes.string.isRequired,
-  statusUrl: PropTypes.string.isRequired,
-  executeUrl: PropTypes.string.isRequired,
+  return <SimpleButton label={label} onClick={execute} disabled={!status} />;
 };
+
+export default StatusButton;

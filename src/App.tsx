@@ -6,7 +6,7 @@ import HomeScreen from "./components/HomeScreen";
 import Header from "./components/Header";
 import { CssBaseline } from "@material-ui/core";
 
-function App() {
+const App = () => {
   const [darkState, setDarkState] = useState(true);
   const palletType = darkState ? "dark" : "light";
   const name = "Jarvis";
@@ -48,6 +48,6 @@ function App() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

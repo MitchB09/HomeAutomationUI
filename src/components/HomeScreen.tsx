@@ -1,12 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import styles from "./HomeScreen.module.css";
 import StatusButton from "./StatusButton";
 import SimpleButton from "./SimpleButton";
 
-export default function HomeList(props: any) {
+type HomeListProps = {
+  name: string;
+};
+
+const HomeList = ({ name }: HomeListProps) => {
   return (
     <>
       <Grid
@@ -51,7 +54,7 @@ export default function HomeList(props: any) {
             <SimpleButton
               label="Simple Lists"
               onClick={() => {
-                window.open("https://simplelists.bilensky.ca/");
+                window.open("https://simple-lists.bilensky.ca/");
               }}
             />
           </div>
@@ -66,11 +69,29 @@ export default function HomeList(props: any) {
             />
           </div>
         </Grid>
+        <Grid item>
+          <div className={styles.buttonContainer}>
+            <SimpleButton
+              label="CBC News"
+              onClick={() => {
+                window.open("https://www.cbc.ca/news");
+              }}
+            />
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={styles.buttonContainer}>
+            <SimpleButton
+              label="Hacker News"
+              onClick={() => {
+                window.open("https://news.ycombinator.com/");
+              }}
+            />
+          </div>
+        </Grid>
       </Grid>
     </>
   );
-}
-
-HomeList.propTypes = {
-  name: PropTypes.string.isRequired,
 };
+
+export default HomeList;
